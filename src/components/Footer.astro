@@ -1,0 +1,133 @@
+---
+import { useTranslation } from '../i18n/translations';
+
+const { currentLang = 'en' } = Astro.props;
+const { t } = useTranslation(currentLang as 'en' | 'rw' | 'fr');
+
+const currentYear = new Date().getFullYear();
+
+const footerLinks = [
+  {
+    title: 'Government',
+    links: [
+      { name: 'About Rwanda', url: 'https://www.gov.rw/about' },
+      { name: 'Leadership', url: 'https://www.gov.rw/government' },
+      { name: 'Ministries', url: 'https://www.gov.rw/cabinet' },
+      { name: 'Agencies', url: 'https://www.gov.rw/agencies' }
+    ]
+  },
+  {
+    title: 'Services',
+    links: [
+      { name: 'All Services', url: '/get-access' },
+      { name: 'Business', url: '/categories/business' },
+      { name: 'Immigration', url: '/categories/immigration' },
+      { name: 'Civil Registry', url: '/categories/civil-registry' }
+    ]
+  },
+  {
+    title: 'Resources',
+    links: [
+      { name: 'Laws & Regulations', url: 'https://www.minijust.gov.rw/laws' },
+      { name: 'Publications', url: 'https://www.gov.rw/publications' },
+      { name: 'Statistics', url: 'https://www.statistics.gov.rw' },
+      { name: 'Open Data', url: 'https://data.gov.rw' }
+    ]
+  },
+  {
+    title: 'Connect',
+    links: [
+      { name: 'Contact Us', url: 'https://www.gov.rw/contact' },
+      { name: 'Feedback', url: 'https://support.irembo.gov.rw/en/support/tickets/new' },
+      { name: 'Social Media', url: 'https://www.gov.rw/social' },
+      { name: 'Help Center', url: 'https://support.irembo.gov.rw/en/support/home?utm_source=irembogov_web&utm_medium=navbar_btn&utm_campaign=KB_Visibility_On_IremboGov' }
+    ]
+  }
+];
+---
+
+<footer class="bg-gray-900 text-white mt-20">
+  <!-- Main Footer -->
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Logo and Description -->
+      <div class="col-span-1 md:col-span-2 lg:col-span-1">
+        <div class="flex items-center space-x-3 mb-4">
+          <img 
+            src="/images/rwanda-coat-of-arms.png" 
+            alt="Rwanda Coat of Arms" 
+            class="h-12 w-auto"
+          />
+          <div>
+            <h3 class="text-lg font-bold">Rwanda</h3>
+            <p class="text-sm text-gray-400">Government Services</p>
+          </div>
+        </div>
+        <p class="text-gray-400 mb-6">
+          Official portal for Rwanda government services. Access information and services provided by the Government of Rwanda.
+        </p>
+        <div class="flex space-x-4">
+          <a href="https://twitter.com/RwandaGov" class="text-gray-400 hover:text-white transition-colors">
+            <span class="sr-only">Twitter</span>
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/RwandaGov" class="text-gray-400 hover:text-white transition-colors">
+            <span class="sr-only">Facebook</span>
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+          <a href="https://www.youtube.com/RwandaGov" class="text-gray-400 hover:text-white transition-colors">
+            <span class="sr-only">YouTube</span>
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Links -->
+      {footerLinks.map((section) => (
+        <div>
+          <h3 class="text-lg font-semibold mb-4">{section.title}</h3>
+          <ul class="space-y-2">
+            {section.links.map((link) => (
+              <li>
+                <a 
+                  href={link.url}
+                  class="text-gray-400 hover:text-white transition-colors"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <div class="text-sm text-gray-400">
+          © {currentYear} Government of Rwanda. All rights reserved.
+        </div>
+        <div class="flex space-x-6">
+          <a href="/privacy" class="text-sm text-gray-400 hover:text-white transition-colors">
+            Privacy Policy
+          </a>
+          <a href="/terms" class="text-sm text-gray-400 hover:text-white transition-colors">
+            Terms of Service
+          </a>
+          <a href="/accessibility" class="text-sm text-gray-400 hover:text-white transition-colors">
+            Accessibility
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,77 @@
+---
+const languages = [
+  { code: 'en', name: 'English', flag: '🇬🇧' },
+  { code: 'rw', name: 'Kinyarwanda', flag: '🇷🇼' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' }
+];
+
+const { currentLang = 'en' } = Astro.props;
+---
+
+<div class="relative" id="language-selector">
+  <button
+    type="button"
+    class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100"
+    id="language-button"
+  >
+    <span class="text-lg">{languages.find(l => l.code === currentLang)?.flag}</span>
+    <span>{languages.find(l => l.code === currentLang)?.name}</span>
+    <svg
+      class="h-4 w-4"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 9l-7 7-7-7"
+      />
+    </svg>
+  </button>
+
+  <div
+    class="hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50"
+    id="language-menu"
+  >
+    {languages.map((lang) => (
+      <a
+        href={`?lang=${lang.code}`}
+        class="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+      >
+        <span class="text-lg">{lang.flag}</span>
+        <span>{lang.name}</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<script>
+  const languageButton = document.getElementById('language-button');
+  const languageMenu = document.getElementById('language-menu');
+
+  languageButton?.addEventListener('click', () => {
+    languageMenu?.classList.toggle('hidden');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (event) => {
+    const selector = document.getElementById('language-selector');
+    if (selector && !selector.contains(event.target as Node)) {
+      languageMenu?.classList.add('hidden');
+    }
+  });
+
+  // Handle language change
+  const languageLinks = document.querySelectorAll('#language-menu a');
+  languageLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const url = new URL(window.location.href);
+      const lang = new URL(e.currentTarget.href).searchParams.get('lang');
+      url.searchParams.set('lang', lang);
+      window.location.href = url.toString();
+    });
+  });
+</script>

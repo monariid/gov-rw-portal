@@ -1,0 +1,42 @@
+---
+import Logo from './Logo.astro';
+import Navigation from './Navigation.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { useTranslation } from '../i18n/translations';
+
+const { currentLang = 'en' } = Astro.props;
+const { t } = useTranslation(currentLang as 'en' | 'rw' | 'fr');
+---
+
+<header class="fixed w-full top-0 z-50 bg-white dark:bg-gray-900 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <div class="flex items-center">
+        <Logo />
+        <Navigation currentLang={currentLang} />
+      </div>
+      
+      <div class="flex items-center space-x-6">
+        <ThemeToggle />
+        
+        <!-- Language Selector -->
+        <select 
+          class="bg-transparent border-none text-gray-600 dark:text-gray-300"
+          onChange="window.location.href = '?lang=' + this.value"
+        >
+          <option value="en" selected={currentLang === 'en'}>🇬🇧 English</option>
+          <option value="rw" selected={currentLang === 'rw'}>🇷🇼 Kinyarwanda</option>
+          <option value="fr" selected={currentLang === 'fr'}>🇫🇷 Français</option>
+        </select>
+
+        <!-- Get Access Button -->
+        <a
+          href="/get-access"
+          class="hidden md:inline-flex px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          Get Access
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

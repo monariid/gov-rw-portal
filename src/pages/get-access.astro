@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { useTranslation } from '../i18n/translations';
+import { services } from '../data/services';
+
+const lang = Astro.url.searchParams.get('lang') || 'en';
+const { t } = useTranslation(lang as 'en' | 'rw' | 'fr');
+---
+
+<Layout title="Get Access - Rwanda Government Services">
+  <div class="pt-24 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">Government Services Access</h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Access all government services through our integrated platform. Simple, secure, and efficient.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {services.map((service) => (
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">{service.title}</h3>
+              <p class="text-gray-600 mb-4">{service.description}</p>
+              <div class="flex items-center justify-between">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                  {service.category}
+                </span>
+                <a
+                  href={service.url}
+                  class="inline-flex items-center text-blue-600 hover:text-blue-700"
+                >
+                  Access
+                  <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>

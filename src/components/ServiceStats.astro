@@ -1,0 +1,18 @@
+---
+import { services, categories } from '../data/services';
+---
+
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-16">
+  <div class="bg-white rounded-lg shadow p-4 sm:p-6 text-center">
+    <h3 class="text-xl sm:text-2xl font-bold text-blue-600">{services.length}</h3>
+    <p class="text-sm sm:text-base text-gray-600">Available Services</p>
+  </div>
+  <div class="bg-white rounded-lg shadow p-4 sm:p-6 text-center">
+    <h3 class="text-xl sm:text-2xl font-bold text-blue-600">{categories.length}</h3>
+    <p class="text-sm sm:text-base text-gray-600">Service Categories</p>
+  </div>
+  <div class="bg-white rounded-lg shadow p-4 sm:p-6 text-center">
+    <h3 class="text-xl sm:text-2xl font-bold text-blue-600">24/7</h3>
+    <p class="text-sm sm:text-base text-gray-600">Online Access</p>
+  </div>
+</div>

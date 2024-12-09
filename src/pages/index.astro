@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Search from '../components/Search';
+import CategoryCard from '../components/CategoryCard.astro';
+import ServiceStats from '../components/ServiceStats.astro';
+import QuickLink from '../components/QuickLink.astro';
+import { categories } from '../data/services';
+import { useTranslation } from '../i18n/translations';
+
+const lang = Astro.url.searchParams.get('lang') || 'en';
+const { t } = useTranslation(lang as 'en' | 'rw' | 'fr');
+
+const quickLinks = [
+  { name: 'Official Government Portal', url: 'https://www.gov.rw/', icon: '🏛️' },
+  { name: 'Irembo E-Services', url: 'https://irembo.gov.rw/', icon: '💻' },
+  { name: 'Rwanda Revenue Authority', url: 'https://www.rra.gov.rw/', icon: '📊' },
+  { name: 'Rwanda Development Board', url: 'https://www.rgb.rw/', icon: '🏢' },
+  { name: 'Ministry of Justice', url: 'https://www.minijust.gov.rw/', icon: '⚖️' },
+  { name: 'Ministry of Foreign Affairs', url: 'https://www.minaffet.gov.rw/', icon: '🌍' }
+];
+---
+
+<Layout title={t('hero.title')}>
+  <main class="min-h-screen bg-gray-50">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white py-12 sm:py-20">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-8 sm:mb-12">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-4">
+            {t('hero.title')}
+          </h1>
+          <p class="text-base sm:text-xl text-blue-100 max-w-3xl mx-auto px-4">
+            {t('hero.subtitle')}
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4">
+          <Search client:load lang={lang} />
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 py-8 sm:py-16">
+      <ServiceStats />
+
+      <!-- Service Categories -->
+      <section class="mt-8 sm:mt-16">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 px-4">{t('categories.title')}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {categories.map((category) => (
+            <CategoryCard {...category} />
+          ))}
+        </div>
+      </section>
+
+      <!-- Quick Links -->
+      <section class="mt-12 sm:mt-20">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 px-4">{t('quickLinks.title')}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+          {quickLinks.map((link) => (
+            <QuickLink {...link} />
+          ))}
+        </div>
+      </section>
+
+      <!-- Connect Section -->
+      <section class="mt-12 sm:mt-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl shadow-lg p-8 text-white">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-8">Connect With Us</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <a href="/contact" class="connect-card">
+            <div class="icon">📞</div>
+            <h3>Contact Us</h3>
+            <p>Get in touch with our support team</p>
+          </a>
+          <a href="https://t.me/NSHUTI_J5" class="connect-card">
+            <div class="icon">💬</div>
+            <h3>Feedback</h3>
+            <p>Share your thoughts and suggestions</p>
+          </a>
+          <a href="https://t.me/NSHUTI_J5" class="connect-card">
+            <div class="icon">🌐</div>
+            <h3>Social Media</h3>
+            <p>Follow us for updates and news</p>
+          </a>
+          <a href="https://t.me/NSHUTI_J5" class="connect-card">
+            <div class="icon">❓</div>
+            <h3>Help Center</h3>
+            <p>Find answers to common questions</p>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .connect-card {
+    @apply bg-white/10 rounded-xl p-6 transition-all duration-500 hover:bg-white/20 hover:shadow-lg transform hover:-translate-y-1;
+  }
+  
+  .connect-card .icon {
+    @apply text-3xl mb-4 transform transition-transform duration-300;
+  }
+  
+  .connect-card:hover .icon {
+    @apply scale-110 rotate-6;
+  }
+  
+  .connect-card h3 {
+    @apply text-lg font-semibold mb-2;
+  }
+  
+  .connect-card p {
+    @apply text-sm text-blue-100;
+  }
+</style>

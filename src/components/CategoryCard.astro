@@ -1,0 +1,104 @@
+---
+const { title, description, icon, href } = Astro.props;
+---
+
+<a href={href} class="block transform hover:scale-105 transition-all duration-500">
+  <div class="bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl shadow-lg hover:shadow-2xl transition-all p-6 group relative overflow-hidden text-white h-full">
+    <!-- Animated Background Effect -->
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    
+    <!-- Floating Particles Effect -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="particle-1"></div>
+      <div class="particle-2"></div>
+      <div class="particle-3"></div>
+    </div>
+    
+    <!-- Content -->
+    <div class="relative z-10">
+      <div class="text-5xl mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 motion-safe:animate-bounce">
+        {icon}
+      </div>
+      <h3 class="text-2xl font-bold mb-3 group-hover:translate-x-2 transition-transform duration-300">
+        {title}
+      </h3>
+      <p class="text-blue-100 group-hover:text-white transition-colors duration-300">
+        {description}
+      </p>
+      
+      <!-- Animated Arrow -->
+      <div class="mt-6 flex items-center text-blue-100 group-hover:text-white opacity-0 group-hover:opacity-100 transform translate-x-[-20px] group-hover:translate-x-0 transition-all duration-500">
+        <span class="text-sm font-medium mr-2">Explore Services</span>
+        <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Hover Border Effect -->
+    <div class="absolute inset-0 border-2 border-blue-300 opacity-0 group-hover:opacity-20 rounded-xl transition-opacity duration-500"></div>
+  </div>
+</a>
+
+<style>
+  /* Floating Particles Animation */
+  .particle-1,
+  .particle-2,
+  .particle-3 {
+    @apply absolute rounded-full bg-blue-300 opacity-20;
+    animation: float 10s infinite;
+  }
+
+  .particle-1 {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: -25px;
+    animation-delay: 0s;
+  }
+
+  .particle-2 {
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    right: -15px;
+    animation-delay: -2s;
+  }
+
+  .particle-3 {
+    width: 40px;
+    height: 40px;
+    bottom: -20px;
+    right: 30%;
+    animation-delay: -5s;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-20px) rotate(90deg);
+    }
+    50% {
+      transform: translateY(0) rotate(180deg);
+    }
+    75% {
+      transform: translateY(20px) rotate(270deg);
+    }
+  }
+
+  /* Hover Animation */
+  .group:hover {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
+</style>

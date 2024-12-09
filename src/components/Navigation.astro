@@ -1,0 +1,84 @@
+---
+import { useTranslation } from '../i18n/translations';
+
+const { currentLang = 'en' } = Astro.props;
+const { t } = useTranslation(currentLang as 'en' | 'rw' | 'fr');
+
+const navigation = [
+  { name: t('nav.home'), href: '/' },
+  { name: t('nav.services'), href: '/get-access' },
+  { name: t('nav.about'), href: '/about' },
+  { name: t('nav.contact'), href: '/contact' }
+];
+---
+
+<nav class="hidden md:flex ml-10 space-x-8">
+  {navigation.map((item) => (
+    <a
+      href={item.href}
+      class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium"
+    >
+      {item.name}
+    </a>
+  ))}
+</nav>
+
+<!-- Mobile menu button -->
+<button
+  type="button"
+  class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100"
+  aria-expanded="false"
+  id="mobile-menu-button"
+>
+  <span class="sr-only">Open main menu</span>
+  <svg
+    class="block h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M4 6h16M4 12h16M4 18h16"
+    />
+  </svg>
+</button>
+
+<!-- Mobile menu -->
+<div class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-lg" id="mobile-menu">
+  <div class="px-2 pt-2 pb-3 space-y-1">
+    {navigation.map((item) => (
+      <a
+        href={item.href}
+        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+      >
+        {item.name}
+      </a>
+    ))}
+    <a
+      href="/get-access"
+      class="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
+    >
+      {t('nav.getAccess')}
+    </a>
+  </div>
+</div>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (event) => {
+    if (!mobileMenuButton?.contains(event.target as Node) && !mobileMenu?.contains(event.target as Node)) {
+      mobileMenu?.classList.add('hidden');
+    }
+  });
+</script>

@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MinistryCard from '../components/MinistryCard.astro';
+import { ministryContacts } from '../data/ministries';
+---
+
+<Layout title="Government Ministries - Rwanda Government Portal">
+  <main class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="mb-12">
+        <a href="/" class="text-blue-600 hover:underline mb-8 inline-block">← Back to Home</a>
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">Government Ministries and Contacts</h1>
+        <p class="text-xl text-gray-600">
+          Find contact information for Rwanda's government ministries and departments.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {ministryContacts.map((ministry) => (
+          <MinistryCard ministry={ministry} />
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>
